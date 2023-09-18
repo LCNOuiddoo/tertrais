@@ -28,5 +28,6 @@ class HelpdeskTicket(models.Model):
         # if not self.description and message.subtype_id == self._creation_subtype() and self.partner_id == message.author_id:
         #     self.description = message.body
         res= super(HelpdeskTicket, self)._message_post_after_hook(message, msg_vals)
-        self.description=''
+        if message.subtype_id == self._creation_subtype() and self.partner_id == message.author_id:
+            self.description = ''
         return res
