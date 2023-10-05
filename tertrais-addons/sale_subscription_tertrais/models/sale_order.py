@@ -25,3 +25,11 @@ class SaleOrder(models.Model):
             if sub.id not in sub_to_skip:
                 sub.start_date = False
                 sub.next_invoice_date = False
+                
+    @api.depends('order_line.product_id.project_id')
+    def _compute_tasks_ids(self):
+        for order in self:
+            order.tasks_ids = self.env['project.task'].search(
+                ['&', ('display_project_id', '!=', False), '|', ('sale_line_id', 'in', order.order_line.ids),
+                 ('sale_order_id', '=', order.id)])
+            order.tasks_count = len(order.tasks_ids)             

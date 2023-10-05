@@ -6,7 +6,7 @@
     "summary": "This module allows you to  ***",
     "author": "Ouiddoo",
     "license": "AGPL-3",
-    "depends": ["sale_subscription"],
+    "depends": ["sale_subscription","sale_project"],
 
     "data": [
              "views/sale_order_views.xml",
