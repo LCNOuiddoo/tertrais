@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Sale Projet Tertrais",
+    "name": "Sale Project Tertrais",
     "version": "16.0.1",
     'category': 'sale',
     "summary": "This module allows you to fix odoo sale_project bug***",
