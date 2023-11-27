@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+
+        <div name="address_not_same_as_shipping" position="replace">
+            <div class="col-6" name="address_not_same_as_shipping">
+                <t t-set="address">
+                    <t t-if="not o.partner_id.is_company and o.move_type in ['out_invoice', 'out_refund']">
+                        <t t-if="o.partner_id.title">
+                            <span t-field="o.partner_id.title.name"/>
+                        </t>
+                        <span t-field="o.partner_id.name"/>
+                        <address class="mb-0" t-field="o.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                    </t>
+                    <t t-else="">
+                        <address class="mb-0" t-field="o.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                    </t>
+                    <div t-if="o.partner_id.vat">
+                        <t t-if="o.company_id.account_fiscal_country_id.vat_label"
+                           t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="o.partner_id.vat"/>
+                    </div>
+                </t>
+            </div>
+        </div>
+        <div name="address_same_as_shipping" position="replace">
+            <div class="offset-col-6 col-6" name="address_same_as_shipping">
+                <t t-set="address">
+                    <t t-if="not o.partner_id.is_company and o.move_type in ['out_invoice', 'out_refund']">
+                        <t t-if="o.partner_id.title">
+                            <span t-field="o.partner_id.title.name"/>
+                        </t>
+                        <span t-field="o.partner_id.name"/>
+                        <address class="mb-0" t-field="o.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                    </t>
+                    <t t-else="">
+                        <address class="mb-0" t-field="o.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                    </t>
+                    <div t-if="o.partner_id.vat">
+                        <t t-if="o.company_id.account_fiscal_country_id.vat_label"
+                           t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                        <t t-else="">Tax ID</t>:
+                        <span t-field="o.partner_id.vat"/>
+                    </div>
+                </t>
+            </div>
+        </div>
+
+    </template>
+</odoo>
