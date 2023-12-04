@@ -5,7 +5,7 @@
         <div name="address_not_same_as_shipping" position="replace">
             <div class="col-6" name="address_not_same_as_shipping">
                 <t t-set="address">
-                    <t t-if="not o.partner_id.is_company and o.move_type in ['out_invoice', 'out_refund']">
+                    <t t-if="o.move_type in ['out_invoice', 'out_refund']">
                         <t t-if="o.partner_id.title">
                             <span t-field="o.partner_id.title.name"/>
                         </t>
@@ -29,7 +29,7 @@
         <div name="address_same_as_shipping" position="replace">
             <div class="offset-col-6 col-6" name="address_same_as_shipping">
                 <t t-set="address">
-                    <t t-if="not o.partner_id.is_company and o.move_type in ['out_invoice', 'out_refund']">
+                    <t t-if="o.move_type in ['out_invoice', 'out_refund']">
                         <t t-if="o.partner_id.title">
                             <span t-field="o.partner_id.title.name"/>
                         </t>
