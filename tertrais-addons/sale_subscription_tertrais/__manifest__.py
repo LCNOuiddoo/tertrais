@@ -14,11 +14,11 @@
              ],
     "installable": True,
 
-    'assets': {
-        'web.assets_backend': [
+    # 'assets': {
+    #     'web.assets_backend': [
+    #
+    #         'sale_subscription_tertrais/static/src/css/section_note_view.scss',
+    #     ],
 
-            'sale_subscription_tertrais/static/src/css/section_note_view.scss',
-        ],
-
-    },
+    #},
 }
