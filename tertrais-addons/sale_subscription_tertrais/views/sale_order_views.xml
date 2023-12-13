@@ -1,29 +1,38 @@
 <odoo>
 
-<record id="sale_order_view_form_inherit_t" model="ir.ui.view">
-    <field name="name">sale.subscription.order.form_t</field>
+    <record id="sale_order_view_form_inherit_t" model="ir.ui.view">
+        <field name="name">sale.subscription.order.form_t</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_order_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='next_invoice_date']" position="replace"/>
+            <xpath expr="//field[@name='next_invoice_date']" position="replace"/>
+            <xpath expr="//field[@name='start_date']" position="replace"/>
+            <xpath expr="//field[@name='start_date']" position="replace"/>
+            <xpath expr="//div[@name='recurrence_block']/span" position="replace"/>
+            <xpath expr="//div[@name='recurrence_block']/field[@name='end_date']" position="replace"/>
+            <xpath expr="//button[@name='prepare_upsell_order']" position="before">
+                <button string="Start" name="start_subscription" type="object"
+                        attrs="{'invisible': ['|','|',('is_subscription', '=', False),('state','not in', ['order','sale']),('start_date','!=',False)]}"
+                        class="btn-primary"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                <field name="start_date" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                <field name="end_date" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                <field name="next_invoice_date"
+                       attrs="{'invisible': ['|',('is_subscription', '=', False),('state','not in', ['order','sale'])]}"/>
+            </xpath>
 
-<field name="model">sale.order</field>
-<field name="inherit_id" ref="sale_subscription.sale_subscription_order_view_form"/>
-<field name="arch" type="xml">
-    <xpath expr="//field[@name='next_invoice_date']" position="replace"/>
-    <xpath expr="//field[@name='next_invoice_date']" position="replace"/>
-
-    <xpath expr="//field[@name='start_date']" position="replace"/>
-        <xpath expr="//field[@name='start_date']" position="replace"/>
-
- <xpath expr="//div[@name='recurrence_block']/span" position="replace"/>
-     <xpath expr="//div[@name='recurrence_block']/field[@name='end_date']" position="replace"/>
-
-    <xpath expr="//button[@name='prepare_upsell_order']" position="before">
-        <button string="Start" name="start_subscription" type="object" attrs="{'invisible': ['|','|',('is_subscription', '=', False),('state','not in', ['order','sale']),('start_date','!=',False)]}" class="btn-primary"/>
-    </xpath>
-    <xpath expr="//field[@name='partner_shipping_id']" position="after">
-        <field name="start_date"  attrs="{'invisible': [('is_subscription', '=', False)]}"/>
-        <field name="end_date"  attrs="{'invisible': [('is_subscription', '=', False)]}"/>
-        <field name="next_invoice_date" attrs="{'invisible': ['|',('is_subscription', '=', False),('state','not in', ['order','sale'])]}"/>
-    </xpath>
-
-</field>
-</record>
+        </field>
+    </record>
+    <!--<record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.form1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="attributes">
+                <attribute name="width">450px</attribute>
+            </xpath>
+        </field>
+    </record>-->
 </odoo>

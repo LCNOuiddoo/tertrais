@@ -7,8 +7,8 @@
     "author": "Ouiddoo",
     "license": "AGPL-3",
     "depends": ["helpdesk"],
+
     "data": [
              ],
-
     "installable": True,
 }
