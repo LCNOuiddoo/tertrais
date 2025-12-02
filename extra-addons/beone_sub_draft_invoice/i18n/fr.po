@@ -1,0 +1,62 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* beone_sub_draft_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e-20240205\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-11 08:34+0000\n"
+"PO-Revision-Date: 2024-03-11 08:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: beone_sub_draft_invoice
+#. odoo-python
+#: code:addons/beone_sub_draft_invoice/models/sale_order.py:0
+#, python-format
+msgid ""
+"Automatic payment failed. No country specified on payment_token's partner"
+msgstr ""
+
+#. module: beone_sub_draft_invoice
+#: model:ir.model.fields,help:beone_sub_draft_invoice.field_sale_subscription_plan__draft_invoice
+msgid ""
+"Check this if you want that the invoices created with this recurrence to be "
+"not automatically posted"
+msgstr "Cochez ceci si vous souhaitez que les factures sous cette récurrence soient créées en brouillon."
+
+#. module: beone_sub_draft_invoice
+#: model:ir.model.fields,field_description:beone_sub_draft_invoice.field_sale_subscription_plan__draft_invoice
+msgid "Draft invoice"
+msgstr "Facture en brouillon"
+
+#. module: beone_sub_draft_invoice
+#. odoo-python
+#: code:addons/beone_sub_draft_invoice/models/sale_order.py:0
+#, python-format
+msgid "Error during renewal of contract %s %s %s"
+msgstr ""
+
+#. module: beone_sub_draft_invoice
+#. odoo-python
+#: code:addons/beone_sub_draft_invoice/models/sale_order.py:0
+#, python-format
+msgid "Payment not recorded"
+msgstr ""
+
+#. module: beone_sub_draft_invoice
+#. odoo-python
+#: code:addons/beone_sub_draft_invoice/models/sale_order.py:0
+#, python-format
+msgid "Payment recorded: %s"
+msgstr ""
+
+#. module: beone_sub_draft_invoice
+#: model:ir.model,name:beone_sub_draft_invoice.model_sale_subscription_plan
+msgid "Subscription Plan"
+msgstr "Plan d'abonnement"

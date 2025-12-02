@@ -1,11 +1,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
 import logging
-import re
-from collections import defaultdict, OrderedDict
-import warnings
 
 _logger = logging.getLogger(__name__)
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -25,4 +23,3 @@ class SaleOrder(models.Model):
             if sub.id not in sub_to_skip:
                 sub.start_date = False
                 sub.next_invoice_date = False
-
