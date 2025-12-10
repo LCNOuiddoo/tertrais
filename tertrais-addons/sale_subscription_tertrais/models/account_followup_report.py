@@ -171,4 +171,3 @@ class AccountFollowupReport(models.AbstractModel):
         if lines:
             lines.pop()
         return lines
-
