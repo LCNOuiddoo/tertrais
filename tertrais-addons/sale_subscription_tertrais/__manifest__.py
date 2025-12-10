@@ -16,8 +16,8 @@
         "partner_title",
     ],
     "data": [
-        "views/sale_order_views.xml",
-        "views/account_invoice.xml",
+        # "views/sale_order_views.xml",
+        # "views/account_invoice.xml",
     ],
     "installable": True,
 }
