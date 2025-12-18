@@ -11,14 +11,14 @@
             <xpath expr="//field[@name='start_date']" position="replace"/>
             <xpath expr="//div[@name='plan_block']/span" position="replace"/>
             <xpath expr="//div[@name='plan_block']/field[@name='end_date']" position="replace"/>
-            <!-- <xpath expr="//button[@name='prepare_upsell_order']" position="before">
+            <xpath expr="//button[@name='prepare_upsell_order']" position="before">
                 <button 
                     string="Start"
                     name="start_subscription" 
                     type="object"
                     invisible="['|','|',('is_subscription', '=', False),('state','not in', ['order','sale']),('start_date','!=',False)]"
                     class="btn-primary"/>
-            </xpath> -->
+            </xpath>
             <xpath expr="//field[@name='partner_shipping_id']" position="after">
                 <field name="start_date" invisible="['is_subscription', '=', False]"/>
                 <field name="end_date" invisible="['is_subscription', '=', False]"/>
