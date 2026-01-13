@@ -23,3 +23,9 @@ class SaleOrder(models.Model):
             if sub.id not in sub_to_skip:
                 sub.start_date = False
                 sub.next_invoice_date = False
+
+    def _get_invoice_grouping_keys(self):
+        keys = super()._get_invoice_grouping_keys()
+        if 'partner_shipping_id' in keys:
+            keys.remove('partner_shipping_id')
+        return keys

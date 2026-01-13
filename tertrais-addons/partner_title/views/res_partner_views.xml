@@ -5,9 +5,9 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <field name="category_id" position="after">
+            <xpath expr="//sheet/group[1]/group[1]" position="inside">
                 <field name="title" no-create="1" no-open="1" placeholder="e.g. Mister"/>
-            </field>
+            </xpath>
         </field>
     </record>
 </odoo>
