@@ -1,14 +1,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Adaptation Tertrais",
-    "version": "16.0.1",
-    'category': 'Assistance',
+    "version": "19.0.1",
+    "category": "Assistance",
     "summary": "This module allows you to  ***",
     "author": "Ouiddoo",
+    "website": "https://www.ouiddoo.com",
+    "maintainers": ["Louis-de-Bontin"],
     "license": "AGPL-3",
     "depends": ["helpdesk"],
-
-    "data": [
-             ],
+    "data": [],
     "installable": True,
 }

@@ -1,39 +1,45 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+################################################################################
 #
 #    Cybrosys Technologies Pvt. Ltd.
-#    Copyright (C) 2021-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
-#    you can modify it under the terms of the GNU LESSER
-#    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
+#    Copyright (C) 2025-TODAY Cybrosys Technologies(<https://www.cybrosys.com>).
+#    Author: Swaraj R (odoo@cybrosys.com)
+#
+#    This program is free software: you can modify
+#    it under the terms of the GNU Affero General Public License (AGPL) as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU LESSER GENERAL PUBLIC LICENSE (AGPL v3) for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
-#    GENERAL PUBLIC LICENSE (AGPL v3) along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-##############################################################################
+################################################################################
 {
     'name': 'Access Restriction By IP',
-    'summary': """User Can Access His Account Only From Specified IP Address""",
-    'version': '16.0.1.0.0',
-    'description': """User Can Access His Account Only From Specified IP Address""",
-    'live_test_url': 'https://youtu.be/nn6dAL6eKPc',
+    'version': '19.0.1.0.0',
+    'category': 'Extra Tools',
+    'summary': """User can be restricted from logging in from different Ip""",
+    'description': """This module enhances security by allowing administrators 
+     to control user access based on IP addresses. Users will only be able 
+     to log in and access their accounts from specified IP addresses, 
+     providing an additional layer of protection against unauthorized access.
+     """,
     'author': 'Cybrosys Techno Solutions',
     'company': 'Cybrosys Techno Solutions',
+    'maintainer': 'Cybrosys Techno Solutions',
     'website': 'https://www.cybrosys.com',
-    'category': 'Tools',
-    'depends': ['base', 'mail'],
-    'license': 'AGPL-3',
     'data': [
         'security/ir.model.access.csv',
-        'views/allowed_ips_view.xml',
+        'views/allowed_ips_view.xml'
     ],
-    'images': ['static/description/banner.png'],
+    'images': ['static/description/banner.jpg'],
+    'license': 'AGPL-3',
     'installable': True,
     'auto_install': False,
     'application': False,
 }
-
