@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit and customize the sale order report template -->
+    <template id="report_saleorder_document_custom" inherit_id="sale.report_saleorder_document">
+        
+        <!-- Rename "Unit Price" to "P.U HT" -->
+        <xpath expr="//th[@name='th_priceunit']" position="replace">
+            <th  name="th_priceunit" class="text-end text-nowrap">P.U HT</th>
+        </xpath>
+        
+        <!-- Rename "Taxes" to "TVA" -->
+        <xpath expr="//th[@name='th_taxes']/span" position="replace">
+            <span>TVA</span>
+        </xpath>
+        
+        <!-- Add new column header "P.U TTC" after taxes column -->
+        <xpath expr="//th[@name='th_taxes']" position="after">
+            <th name="th_priceunit_ttc" t-if="display_taxes" class="text-end text-nowrap">
+                <span>P.U TTC</span>
+            </th>
+        </xpath>
+        
+        <!-- Rename "Amount" to "Total TTC" -->
+        <xpath expr="//th[@name='th_subtotal']/span" position="replace">
+            <span>Total TTC</span>
+        </xpath>
+        
+        <!-- Force price_field to always be 'price_total' for TTC display -->
+        <xpath expr="//t[@t-set='price_field']" position="replace">
+            <t t-set="price_field" t-value="'price_total'"/>
+        </xpath>
+
+        <!-- Remove the conditional price_total span since we always show it now -->
+        <xpath expr="//td[@name='td_product_subtotal']//span[@t-field='line.price_subtotal']" position="replace"/>
+        
+        <!-- Force display of price_total in the Total TTC column -->
+        <xpath expr="//td[@name='td_product_subtotal']//span[@t-field='line.price_total']" position="replace">
+            <span t-field="line.price_total">27.00</span>
+        </xpath>
+        
+        <!-- Add P.U TTC cell for regular product lines -->
+        <xpath expr="//tr[@name='tr_product']/td[@name='td_product_taxes']" position="after">
+            <td t-if="display_taxes" name="td_product_priceunit_ttc" class="text-end text-nowrap">
+                <span
+                    t-if="not collapse_prices and line.product_uom_qty"
+                    t-out="line.price_total / line.product_uom_qty"
+                    t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"
+                >
+                    30.00
+                </span>
+            </td>
+        </xpath>
+        
+        <!-- Add P.U TTC cell for grouped section lines -->
+        <xpath expr="//tr[@name='tr_section_group']/td[@name='td_section_group_taxes']" position="after">
+            <td t-if="display_taxes" name="td_section_group_priceunit_ttc" class="text-end text-nowrap">
+                <!-- Empty cell for grouped sections -->
+            </td>
+        </xpath>
+        
+        <!-- Force section grouped totals to display price_total -->
+        <xpath expr="//span[@name='price_subtotal_section_grouped']" position="attributes">
+            <attribute name="t-out">section_line['price_total']</attribute>
+        </xpath>
+        
+        <!-- Update colspan for section headers to account for new column -->
+        <xpath expr="//tr[@name='tr_section']/td[@name='td_section_name']" position="attributes">
+            <attribute name="t-att-colspan">3 + (1 if display_discount else 0) + (2 if display_taxes else 0)</attribute>
+        </xpath>
+        
+        <!-- Update colspan for combo product headers -->
+        <xpath expr="//tr[@name='tr_combo']/td[@name='td_combo_name']" position="attributes">
+            <attribute name="t-att-colspan">3 + (1 if display_discount else 0) + (2 if display_taxes else 0)</attribute>
+        </xpath>
+        
+    </template>
+</odoo>
