@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit and customize the invoice report template -->
+    <template id="report_invoice_document_custom" inherit_id="account.report_invoice_document">
+        
+        <!-- Rename "Unit Price" to "P.U HT" -->
+        <xpath expr="//th[@name='th_priceunit']/span" position="replace">
+            <span>P.U HT</span>
+        </xpath>
+        
+        <!-- Rename "Taxes" to "TVA" -->
+        <xpath expr="//th[@name='th_taxes']/span" position="replace">
+            <span>TVA</span>
+        </xpath>
+        
+        <!-- Add new column header "P.U TTC" after taxes column -->
+        <xpath expr="//th[@name='th_taxes']" position="after">
+            <th name="th_priceunit_ttc" t-if="display_taxes" t-attf-class="text-end text-nowrap {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                <span>P.U TTC</span>
+            </th>
+        </xpath>
+        
+        <!-- Rename "Amount" to "Total TTC" -->
+        <xpath expr="//th[@name='th_subtotal']/span" position="replace">
+            <span>Total TTC</span>
+        </xpath>
+        
+        <!-- Add P.U TTC cell for regular product lines -->
+        <xpath expr="//t[@name='account_invoice_line_accountable']/td[@name='td_taxes']" position="after">
+            <td name="td_priceunit_ttc" t-if="display_taxes" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                <span 
+                    t-if="not hide_prices and line.quantity" 
+                    class="text-nowrap" 
+                    t-out="line.price_total / line.quantity"
+                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                >
+                    10.80
+                </span>
+            </td>
+        </xpath>
+        
+        <!-- Update colspan for section headers to include the new P.U TTC column -->
+        <xpath expr="//td[@name='line_name_td']" position="attributes">
+            <attribute name="t-att-colspan">(1 if is_product else (line_colspan + (1 if display_taxes else 0)))</attribute>
+        </xpath>
+        
+        <!-- Add P.U TTC cell for grouped lines -->
+        <xpath expr="//tr[@t-att-class]/td[@name='td_taxes_grouped']" position="after">
+            <td name="td_priceunit_ttc_grouped"
+                colspan="1"
+                t-if="display_taxes and (grouped_line['display_type'] == 'product' or grouped_line.get('taxes'))"
+                t-attf-class="text-end {{'d-none d-md-table-cell' if report_type == 'html' else ''}}">
+                <!-- Empty cell for grouped lines -->
+            </td>
+        </xpath>
+        
+        <!-- Update line_colspan for non-product lines -->
+        <xpath expr="//t[@t-else='']/t[@t-set='line_colspan']" position="replace">
+            <t t-set="line_colspan" t-value="3 + (1 if display_discount else 0) + (2 if display_taxes and not grouped_line.get('taxes') else 0)"/>
+        </xpath>
+        
+    </template>
+</odoo>
