@@ -31,6 +31,19 @@
             <span>Total TTC</span>
         </xpath>
         
+        <!-- Force price_field to always be 'price_total' for TTC display -->
+        <xpath expr="//t[@t-set='price_field']" position="replace">
+            <t t-set="price_field" t-value="'price_total'"/>
+        </xpath>
+
+        <!-- Remove the conditional price_total span since we always show it now -->
+        <xpath expr="//span[@t-field='line.price_total']" position="replace"/>
+        
+        <!-- Force display of price_total in the Total TTC column -->
+        <xpath expr="//span[@t-field='line.price_subtotal']" position="replace">
+            <span t-field="line.price_total">27.00</span>
+        </xpath>
+        
         <!-- Add P.U TTC cell for regular product lines -->
         <xpath expr="//tr[@name='tr_product']/td[@name='td_product_taxes']" position="after">
             <td t-if="display_taxes" name="td_product_priceunit_ttc" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
@@ -48,6 +61,11 @@
             <td t-if="display_taxes" name="td_section_group_priceunit_ttc" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                 <!-- Empty cell for grouped sections -->
             </td>
+        </xpath>
+        
+        <!-- Force section grouped totals to display price_total -->
+        <xpath expr="//td[@name='td_section_group_total']/span[@name='price_subtotal_section_grouped']" position="attributes">
+            <attribute name="t-out">section_line['price_total']</attribute>
         </xpath>
         
         <!-- Update colspan for section headers to account for new column -->
