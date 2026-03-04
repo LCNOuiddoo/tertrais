@@ -28,6 +28,7 @@ class SaleOrderLine(models.Model):
                 [
                     ('id', '>', last_id),
                     ('product_id.default_code', '!=', False),
+                    ('order_id.locked', '=', False),
                 ],
                 order='id',
                 limit=batch_size,
