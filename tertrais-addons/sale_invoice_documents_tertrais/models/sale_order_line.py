@@ -28,7 +28,6 @@ class SaleOrderLine(models.Model):
                 [
                     ('id', '>', last_id),
                     ('product_id.default_code', '!=', False),
-                    ('order_id.locked', '=', False),
                 ],
                 order='id',
                 limit=batch_size,
@@ -50,3 +49,38 @@ class SaleOrderLine(models.Model):
             last_id = lines[-1].id
 
         _logger.info("Completed cleanup of sale.order.line names.")
+
+    @api.model
+    def _cron_unlock_cleanup_relock_sale_order_lines(self, batch_size=1000):
+        """Temporarily unlock locked orders, clean up line names, then re-lock them.
+
+        This is intended as a one-off maintenance job. It:
+        1) remembers which sale orders were locked,
+        2) unlocks only those orders via SQL,
+        3) runs the batch cleanup on all lines,
+        4) re-locks only the orders that were initially locked.
+        """
+        cr = self.env.cr
+
+        # 1) Remember which orders are locked right now
+        self.env.cr.execute("SELECT id FROM sale_order WHERE locked = TRUE")
+        locked_ids = [row[0] for row in self.env.cr.fetchall()]
+
+        # 2) Unlock them in SQL
+        if locked_ids:
+            cr.execute("UPDATE sale_order SET locked = FALSE WHERE id = ANY(%s)", [locked_ids])
+            cr.commit()
+
+        try:
+            # 3) Run existing cleanup (now allowed to touch lines of previously locked orders)
+            self._cron_cleanup_sale_order_line_names(batch_size=batch_size)
+        finally:
+            # 4) Re-lock only the orders that were initially locked
+            if locked_ids:
+                cr.execute("UPDATE sale_order SET locked = TRUE WHERE id = ANY(%s)", [locked_ids])
+                cr.commit()
+
+        _logger.info(
+            "Unlock/cleanup/relock of sale orders completed (processed %s initially locked orders).",
+            len(locked_ids),
+        )
