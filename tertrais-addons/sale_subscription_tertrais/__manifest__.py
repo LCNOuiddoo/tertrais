@@ -1,7 +1,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Subscription Tertrais",
-    "version": "19.0.1",
+    "version": "19.0.2",
     "category": "sale",
     "summary": "This module allows you to fix odoo sale_subscription bug",
     "author": "Ouiddoo",
