@@ -12,6 +12,19 @@ class SaleOrderLine(models.Model):
         res = super()._compute_name()
         for line in self:
             line.name = line.name.replace(f"[{line.product_id.default_code}] ", "")
+        return res
+
+    def _get_display_name_without_code(self):
+        """Return line name without the product default_code prefix for portal/report."""
+        self.ensure_one()
+        name = self.name or ""
+        if not self.product_id:
+            return name
+        code = self.product_id.default_code
+        if not code:
+            return name
+        prefix = f"[{code}] "
+        return name.replace(prefix, "")
 
     @api.model
     def _cron_cleanup_sale_order_line_names(self, batch_size=1000):

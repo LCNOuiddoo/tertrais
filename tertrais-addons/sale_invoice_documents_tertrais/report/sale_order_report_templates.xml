@@ -2,7 +2,11 @@
 <odoo>
     <!-- Inherit and customize the sale order report template -->
     <template id="report_saleorder_document_custom" inherit_id="sale.report_saleorder_document">
-        
+        <!-- Use cleaned name without product default_code in description column -->
+        <xpath expr="//tr[@name='tr_product']/td[@name='td_product_name']/span" position="replace">
+            <span t-out="line._get_display_name_without_code()"/>
+        </xpath>
+
         <!-- Rename "Unit Price" to "P.U HT" -->
         <xpath expr="//th[@name='th_priceunit']" position="replace">
             <th  name="th_priceunit" class="text-end text-nowrap">P.U HT</th>
