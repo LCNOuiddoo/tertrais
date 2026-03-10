@@ -21,10 +21,11 @@ class SaleOrderLine(models.Model):
         if not self.product_id:
             return name
         code = self.product_id.default_code
-        if not code:
-            return name
+        product_display_name = self.product_id.display_name
         prefix = f"[{code}] "
-        return name.replace(prefix, "")
+        if not product_display_name and not code:
+            return name
+        return name.replace(f"{product_display_name}\n", "").replace(prefix, "")
 
     @api.model
     def _cron_cleanup_sale_order_line_names(self, batch_size=1000):
