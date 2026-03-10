@@ -18,6 +18,25 @@
             <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
         </xpath>
 
+        <xpath expr="//td[@name='td_section_name_xs']/span" position="replace">
+            <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
+        </xpath>
+        <xpath expr="//td[@name='td_section_name_sm']/span" position="replace">
+            <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
+        </xpath>
+        <xpath expr="//td[@name='td_section_name']/span" position="replace">
+            <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
+        </xpath>
+        <xpath expr="//td[@name='td_note_name']/span" position="replace">
+            <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
+        </xpath>
+        <xpath expr="//td[@name='td_combo_name']/span" position="replace">
+            <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
+        </xpath>
+        <xpath expr="//td[@name='td_section_group_name']/span" position="replace">
+            <span name="span_product_name" t-out="line._get_display_name_without_code()"/>
+        </xpath>
+
         <!-- Rename "Taxes" to "TVA" -->
         <xpath expr="//th[@id='taxes_header']/span" position="replace">
             <span>TVA</span>
