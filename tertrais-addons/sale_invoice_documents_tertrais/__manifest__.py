@@ -20,8 +20,6 @@
         "report/invoice_report_templates.xml",
         # Portal views
         "views/portal_sale_order_templates.xml",
-        # Cron jobs
-        "data/cron.xml",
     ],
     "installable": True,
     "application": False,
